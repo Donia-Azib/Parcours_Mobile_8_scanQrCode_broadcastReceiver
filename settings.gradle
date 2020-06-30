@@ -1,0 +1,2 @@
+rootProject.name='Parcours_Mobile_8_scanQrCode_broadcastReceiver'
+include ':app'

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Parcours_Mobile_7_GestionDesEmployee</string>
+    <string name="email">email ?</string>
+    <string name="password">password ?</string>
+    <string name="login">login</string>
+    <string name="first_name">first name?</string>
+    <string name="phone">phone ?</string>
+    <string name="register">Register</string>
+    <string name="main_activity_label">My Users</string>
+    <string name="add_user">Add user</string>
+    <string name="submit">Submit</string>
+    <string name="update_user">Update User</string>
+</resources>
