@@ -32,6 +32,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.0-alpha05'
     implementation 'com.koushikdutta.ion:ion:2.2.1'
 
+//    qr code
+    implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
