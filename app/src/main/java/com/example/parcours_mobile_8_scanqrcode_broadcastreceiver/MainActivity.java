@@ -9,11 +9,14 @@ import androidx.core.content.ContextCompat;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -182,5 +185,54 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+//            declenchement de l'action
+            if(ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction()))
+            {
+//                connected => !connected
+                boolean not_connected = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,false);
+//                        true if not connected / false connected
+
+                if(not_connected)
+                {
+                    choose_pic_btn.setVisibility(View.GONE);
+                    scan_qr_code_btn.setVisibility(View.GONE);
+
+                    picture.setVisibility(View.VISIBLE);
+                    picture.setImageResource(R.drawable.wifi);
+                    Toast.makeText(context, "u're not connected", Toast.LENGTH_SHORT).show();
+
+                }
+                else
+                {
+                    choose_pic_btn.setVisibility(View.VISIBLE);
+                    scan_qr_code_btn.setVisibility(View.VISIBLE);
+                    picture.setVisibility(View.GONE);
+
+                    Toast.makeText(context, "connected...!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+        }
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(broadcastReceiver,intentFilter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        unregisterReceiver(broadcastReceiver);
     }
 }
