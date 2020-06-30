@@ -4,12 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,11 +48,28 @@ public class MainActivity extends AppCompatActivity {
 //            is_connected => false
 //            => loginActivity
 
-            sharedpreferences.edit().clear().apply();
-            sharedpreferences.edit().putBoolean("is_connected",false).apply();
+            new MaterialAlertDialogBuilder(MainActivity.this)
+                    .setTitle("Disconnect !")
+                    .setMessage("Are u sure ?! ")
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    sharedpreferences.edit().clear().apply();
+                    sharedpreferences.edit().putBoolean("is_connected",false).apply();
 
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
+            }).show();
+
+
+
+
 
         }
 
