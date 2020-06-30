@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Parcours_Mobile_7_GestionDesEmployee</string>
+    <string name="app_name">Parcours_Mobile_8_ScanQrCode_Boradcast_receiver</string>
     <string name="email">email ?</string>
     <string name="password">password ?</string>
     <string name="login">login</string>
@@ -11,4 +11,5 @@
     <string name="submit">Submit</string>
     <string name="update_user">Update User</string>
     <string name="commencer"><![CDATA[Commencer >>]]></string>
+    <string name="logout">logout</string>
 </resources>

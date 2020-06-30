@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:contentDescription="image"
-        app:srcCompat="@drawable/ic_launcher_foreground" />
+        app:srcCompat="@drawable/icon" />
 
     <Button
         android:id="@+id/start_btn"
