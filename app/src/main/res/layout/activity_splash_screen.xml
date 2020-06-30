@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".SplashScreenActivity">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="image"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
+
+    <Button
+        android:id="@+id/start_btn"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:fontFamily="casual"
+        style="?attr/materialButtonOutlinedStyle"
+        android:text="@string/commencer" />
+</LinearLayout>

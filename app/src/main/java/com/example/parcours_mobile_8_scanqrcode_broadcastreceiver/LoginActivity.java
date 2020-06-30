@@ -2,7 +2,9 @@ package com.example.parcours_mobile_8_scanqrcode_broadcastreceiver;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,10 +21,18 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
     private Button register;
     private ProgressBar progressBar;
+    private SharedPreferences sharedpreferences;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+//        instance du shared Pref
+        sharedpreferences = getSharedPreferences("shared_pref", Context.MODE_PRIVATE);
+
+
 
         progressBar = findViewById(R.id.progressBar);
 
@@ -64,7 +74,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void UserLogin(String email_str, String password_str) {
+    private void UserLogin(final String email_str, String password_str) {
         progressBar.setVisibility(View.VISIBLE);
 
         String url ="https://backend-people-crud-app.herokuapp.com/users/login";
@@ -97,6 +107,14 @@ public class LoginActivity extends AppCompatActivity {
                             if(!result.has("message"))
                             {
 //                               login successfully
+//                                -- is_connected = true
+//                                -- save token + email
+                                sharedpreferences.edit()
+                                        .putBoolean("is_connected",true)
+                                        .putString("user_email",email_str)
+                                        .putString("user_token",result.get("token").getAsString())
+                                        .apply();
+
                                 Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                 startActivity(intent);
                             }

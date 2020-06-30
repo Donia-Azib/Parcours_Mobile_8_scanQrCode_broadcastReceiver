@@ -12,8 +12,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_person"/>
 
     <Button
         android:id="@+id/choose_pic_btn"
