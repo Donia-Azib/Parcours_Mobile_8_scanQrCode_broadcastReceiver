@@ -34,6 +34,8 @@ dependencies {
 
 //    qr code
     implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
+//    image picker
+    implementation 'com.github.dhaval2404:imagepicker-support:1.7.1'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

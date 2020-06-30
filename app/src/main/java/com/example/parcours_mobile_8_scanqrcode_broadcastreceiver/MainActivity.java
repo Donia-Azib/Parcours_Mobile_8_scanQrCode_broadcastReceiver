@@ -14,24 +14,28 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.blikoon.qrcodescanner.QrCodeActivity;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sharedpreferences;
     private Button scan_qr_code_btn,choose_pic_btn;
+    private ImageView picture;
 
 //    qr code 1
-    private static final int REQUEST_CODE_QR_SCAN = 101;
+    private static final int REQUEST_CODE_QR_SCAN = 99;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,30 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        picture = findViewById(R.id.picture);
+        choose_pic_btn = findViewById(R.id.choose_pic_btn);
+        choose_pic_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA)
+                        == PackageManager.PERMISSION_DENIED)
+                {
+                    ActivityCompat.requestPermissions(MainActivity.this, new String[] {Manifest.permission.CAMERA}, 20);
+                }
+                else
+                {
+                    ImagePicker.Companion.with(MainActivity.this)
+                            .crop()	    			//Crop image(Optional), Check Customization for more option
+                            .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                            .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+                            .start();
+                }
+            }
+        });
+
+
+
+
     }//end on create
 
 //    qr code 3
@@ -92,7 +120,19 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.show();
 
             }
+            else
+            {
+                Uri image_uri = data.getData();
+                picture.setImageURI(image_uri);
+                picture.setVisibility(View.VISIBLE);
+
+            }
         }
+        else
+            if(resultCode == ImagePicker.RESULT_ERROR)
+                Toast.makeText(this, "ERROR IN IMAGE PICKER ", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Task cancelled", Toast.LENGTH_SHORT).show();
 
 
 
